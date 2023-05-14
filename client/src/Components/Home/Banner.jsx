@@ -1,5 +1,7 @@
 import React from 'react';
 import Carousel from 'react-material-ui-carousel';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import "./banner.css"
 
 const Banner = () => {
@@ -13,6 +15,8 @@ const Banner = () => {
     return (
         <div>
             <Carousel
+                NextIcon={<ArrowForwardIosIcon fontSize='large'/>}
+                PrevIcon={<ArrowBackIosIcon fontSize='large'/>}
                 className='carasousel'
                 autoPlay={true}
                 animation='slide'

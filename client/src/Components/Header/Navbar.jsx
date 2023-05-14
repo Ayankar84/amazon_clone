@@ -23,7 +23,7 @@ const Navbar = () => {
                 </div>
                 <div className="right">
                     <div className="nav_btn">
-                        <a href="#">signin</a>
+                        <a href="#">Sign in</a>
                     </div>
                     <div className="cart_btn">
                         <Badge badgeContent={0} color="primary">
