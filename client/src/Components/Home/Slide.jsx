@@ -49,9 +49,9 @@ const Slide = ({title}) => {
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
             >
-                {products.map((e) => {
+                {products.map((e, i) => {
                     return (
-                        <div className="products_items">
+                        <div className="products_items" key={i}>
                             <div className="product_img">
                                 <img src={e.url} alt="productImg" />
                             </div>
