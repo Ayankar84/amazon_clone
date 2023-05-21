@@ -2,10 +2,11 @@ import { Divider } from '@mui/material';
 import React from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { products } from './productData';
+import { useSelector } from 'react-redux';
 import "./slide.css";
 
 const Slide = ({title}) => {
+    const data = useSelector((state)=>state.products)
 
     const responsive = {
         superLargeDesktop: {
@@ -49,7 +50,7 @@ const Slide = ({title}) => {
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
             >
-                {products.map((e, i) => {
+                {data?.map((e, i) => {
                     return (
                         <div className="products_items" key={i}>
                             <div className="product_img">

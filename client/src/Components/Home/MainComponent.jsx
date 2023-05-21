@@ -1,9 +1,28 @@
-import React from 'react';
+import { useEffect } from 'react';
 import Banner from './Banner';
 import "./home.css";
 import Slide from './Slide';
+import { useSelector, useDispatch } from 'react-redux';
+import { saveData } from '../Redux/action';
 
 const MainComponent = () => {
+    let dispatch = useDispatch();
+    let data = useSelector((state) => state.products);
+
+    useEffect(()=>{
+        const getdata =async ()=>{
+            let jsondata = await fetch("/products/alldata");
+            let productList = await jsondata.json();
+            dispatch(saveData(productList.data))
+            // console.log(productList.data);
+        }
+        if(data.length === 0){
+            getdata();
+        }
+    }, [])
+
+    console.log(data);
+
     return (
         <div className='home_section'>
             <div className="banner_part">
