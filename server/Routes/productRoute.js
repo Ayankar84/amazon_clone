@@ -12,4 +12,14 @@ ProductRoute.get("/alldata", async (req, res)=>{
     }
 })
 
+ProductRoute.get("/:id", async (req, res)=>{
+    try{
+        const id = req.params.id;
+        const data = await ProductModel.findOne({id});
+        res.send({data});
+    }catch(e){
+        res.status(400).send({error: e.message});
+    }
+})
+
 module.exports = ProductRoute;

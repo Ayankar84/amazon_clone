@@ -4,12 +4,14 @@ const cors = require("cors");
 const dbConnection = require("./Database/db");
 const ProductModel = require("./Models/productModel");
 const ProductRoute = require("./Routes/productRoute");
+const userRoute = require("./Routes/userRoute");
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 app.use("/products", ProductRoute);
+app.use("/user", userRoute);
 
 app.get("/", (req, res) => {
     res.send("<h1>Hello</h1>")

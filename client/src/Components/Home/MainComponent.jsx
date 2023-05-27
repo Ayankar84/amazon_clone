@@ -7,21 +7,24 @@ import { saveData } from '../Redux/action';
 
 const MainComponent = () => {
     let dispatch = useDispatch();
-    let data = useSelector((state) => state.products);
-
-    useEffect(()=>{
-        const getdata =async ()=>{
-            let jsondata = await fetch("/products/alldata");
-            let productList = await jsondata.json();
-            dispatch(saveData(productList.data))
-            // console.log(productList.data);
+    let storeData = useSelector((state) => state);
+    let data = storeData.products
+    useEffect(() => {
+        const getdata = async () => {
+            try {
+                let jsondata = await fetch("/products/alldata");
+                let productList = await jsondata.json();
+                dispatch(saveData(productList.data))
+            } catch (e) {
+                console.log({ error: e.message });
+            }
         }
-        if(data.length === 0){
+
+        if (data.length === 0) {
             getdata();
         }
     }, [])
 
-    console.log(data);
 
     return (
         <div className='home_section'>

@@ -8,3 +8,19 @@ export const saveData = (payload)=>{
         }
     )
 }
+export const changeCart = (payload)=>{
+    return(
+        {
+            type: "GET_CARTDATA",
+            payload
+        }
+    )
+}
+export const setId = (payload)=>{
+    return(
+        {
+            type: "SET_ID",
+            payload
+        }
+    )
+}

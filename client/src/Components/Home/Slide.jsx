@@ -3,10 +3,11 @@ import React from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import "./slide.css";
 
-const Slide = ({title}) => {
-    const data = useSelector((state)=>state.products)
+const Slide = ({ title }) => {
+    const data = useSelector((state) => state.products)
 
     const responsive = {
         superLargeDesktop: {
@@ -52,14 +53,17 @@ const Slide = ({title}) => {
             >
                 {data?.map((e, i) => {
                     return (
-                        <div className="products_items" key={i}>
-                            <div className="product_img">
-                                <img src={e.url} alt="productImg" />
+                        <Link to={`/product/${e.id}`}>
+                            <div className="products_items" key={i}>
+                                <div className="product_img">
+                                    <img src={e.url} alt="productImg" />
+                                </div>
+                                <p className='products_name'>{e.title.shortTitle}</p>
+                                <p className='products_offer'>{e.discount}</p>
+                                <p className='products_explore'>{e.tagline}</p>
                             </div>
-                            <p className='products_name'>{e.title.shortTitle}</p>
-                            <p className='products_offer'>{e.discount}</p>
-                            <p className='products_explore'>{e.tagline}</p>
-                        </div>
+                        </Link>
+
                     )
                 })}
             </Carousel>

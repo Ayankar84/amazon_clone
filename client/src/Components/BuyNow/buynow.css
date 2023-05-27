@@ -113,6 +113,7 @@
 
 /* right buy now */
 .buynow_container .right_buy {
+    /* position: fixed; */
     flex: .2;
     margin-right: -50px;
     padding: 0 20px;
