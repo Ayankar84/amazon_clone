@@ -8,7 +8,7 @@ ProductRoute.get("/alldata", async (req, res)=>{
         const data = await ProductModel.find();
         res.send({data});
     }catch(e){
-        res.status(400).send(data);
+        res.status(400).send(e.message);
     }
 })
 

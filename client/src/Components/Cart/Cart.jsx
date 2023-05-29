@@ -64,9 +64,9 @@ const Cart = () => {
             const jsonres = await res.json();
             const { data, error } = jsonres
 
-            if(data){
+            if (data) {
                 toast.success("Item Added to cart");
-            }else if(error){
+            } else if (error) {
                 toast.error(error);
             }
 
@@ -74,7 +74,11 @@ const Cart = () => {
 
             // console.log(cart);
         } catch (e) {
-            console.log({ error: e.message })
+            setTimeout(() => {
+                navigate("/cart");
+            }, 1502);
+            toast.error("Login to continue", { autoClose: 1500 });
+            console.log({ error: e.message });
         }
     }
 
@@ -97,9 +101,9 @@ const Cart = () => {
                     />
                     <div className="cart_btn">
                         <button onClick={AddToCart} className='cart_btn1'>Add to Cart</button>
-                        <button className='cart_btn2' onClick={async ()=>{
+                        <button className='cart_btn2' onClick={async () => {
                             await AddToCart();
-                            navigate("/cart")
+                            navigate("/cart");
                         }}>Buy Now</button>
                     </div>
                 </div>

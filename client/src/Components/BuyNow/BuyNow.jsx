@@ -6,6 +6,9 @@ import Subtotal from './Subtotal';
 import Right from './Right';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeCart } from '../Redux/action';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const BuyNow = () => {
   const dispatch = useDispatch()
@@ -46,7 +49,13 @@ const BuyNow = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cart: temp })
       })
-      await res.json();
+      const { data, error } = await res.json();
+
+      if(data){
+        toast.success("Item deleted");
+      }else if(error){
+        toast.error(error);
+      }
 
       dispatch(changeCart({ ...cart, data: temp }))
     } catch (e) {
@@ -92,6 +101,7 @@ const BuyNow = () => {
         </div>
         <Right items={cart} />
       </div>
+      <ToastContainer position="top-center" autoClose={2000} theme="dark" />
     </div>
   )
 }

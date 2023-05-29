@@ -24,3 +24,11 @@ export const setId = (payload)=>{
         }
     )
 }
+export const reset = (payload)=>{
+    return(
+        {
+            type: "RESET",
+            payload
+        }
+    )
+}

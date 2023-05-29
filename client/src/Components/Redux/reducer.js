@@ -22,6 +22,11 @@ const reducer = (state = initialState, { type, payload }) => {
             ...state, userId: payload
         }
     }
+    if(type === "RESET"){
+        return {
+            ...state, userId: "", cart: payload
+        }
+    }
 
     return state;
 }
