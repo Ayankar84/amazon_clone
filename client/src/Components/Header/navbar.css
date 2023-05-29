@@ -135,7 +135,7 @@ header .extrasearch{
     background-color: #fff;
     color: #000;
     top: 50px;
-    width: 440px;
+    width: 451px;
 }
 
 header .extrasearch a{
@@ -168,6 +168,10 @@ header nav .drawer{
     header nav .left input{
         width: 150px;
         margin-left: 10px;
+    }
+
+    header .extrasearch{
+        width: 192px;
     }
 
     header nav .left input::placeholder{

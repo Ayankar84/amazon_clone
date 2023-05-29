@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { changeCart } from '../Redux/action';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import PageLoading from '../Loading/PageLoading';
 
 const Cart = () => {
     const navigate = useNavigate();
@@ -89,7 +90,7 @@ const Cart = () => {
     const month = month_list[date.getMonth()];
     const day = date.getDate();
     if (!product) {
-        return (<></>);
+        return (<PageLoading />);
     }
     return (
         <div className='cart_section'>

@@ -7,21 +7,25 @@ import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeCart, logoutprocess, reset, setId } from '../Redux/action';
+import { changeCart, reset, setId } from '../Redux/action';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Drawer, Menu, MenuItem } from '@mui/material';
+import { Drawer, Menu, MenuItem, List, ListItem } from '@mui/material';
 import RightHeader from './RightHeader';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Navbar = () => {
     const navigate = useNavigate();
     let [user, setUser] = useState(null);
+    let [textSrc, setTextSrc] = useState("");
+    let [hideList, setHideList] = useState(true);
     let [dropen, setDropen] = useState(false);
     let token = localStorage.getItem("token") || null;
     const cartvalue = useSelector((state) => state.cart);
-    const userId = useSelector((state) => state.userId);
+    const { userId, products } = useSelector((state) => state);
     const dispatch = useDispatch()
 
     //menu part
@@ -92,6 +96,12 @@ const Navbar = () => {
             data: [],
             totalQty: 0
         }))
+        toast.success("Logout Successfull")
+    }
+
+    const handelSearch = (e) => {
+        setTextSrc(e.target.value);
+        setHideList(false);
     }
 
     console.log(user)
@@ -105,7 +115,7 @@ const Navbar = () => {
                         <MenuIcon style={{ "color": "#fff" }} />
                     </IconButton>
                     <Drawer open={dropen} onClose={closedrawer}>
-                        <RightHeader user={user} closedrawer={closedrawer} />
+                        <RightHeader user={user} closedrawer={closedrawer} logoutfnc={logoutUser}/>
                     </Drawer>
 
                     <div className="navlogo">
@@ -114,10 +124,24 @@ const Navbar = () => {
                         </Link>
                     </div>
                     <div className="nav_searchbaar">
-                        <input type="text" />
+                        <input type="text" value={textSrc} placeholder="Search Your Products" onChange={handelSearch} />
                         <div className="search_icon">
                             <SearchIcon />
                         </div>
+                        {textSrc &&
+                            <List className='extrasearch' hidden={hideList}>
+                                {
+                                    products.filter((ele) => ele.title.longTitle.toLowerCase().includes(textSrc.toLowerCase())).map((e, i) => {
+                                        return (
+                                            <ListItem>
+                                                <Link to={`/product/${e.id}`} onClick={()=>{setTextSrc("")}}>
+                                                    {e.title.longTitle}
+                                                </Link>
+                                            </ListItem>
+                                        )
+                                    })
+                                }
+                            </List>}
                     </div>
                 </div>
                 <div className="right">
@@ -160,6 +184,7 @@ const Navbar = () => {
                         }}><LogoutIcon style={{ fontSize: 16, marginRight: 3 }} /> LogOut</MenuItem>
                     </Menu>
                 </div>
+                <ToastContainer position="top-center" autoClose={2000} theme="dark" />
             </nav>
         </header>
     )

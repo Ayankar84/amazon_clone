@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import flag_logo from "../images/india.png"
 import "./rightheader.css"
 
-const RightHeader = ({user, closedrawer}) => {
+const RightHeader = ({user, closedrawer, logoutfnc}) => {
     const userId = useSelector((state)=>state.userId)
     return (
         <div className='rightheader'>
@@ -24,6 +24,10 @@ const RightHeader = ({user, closedrawer}) => {
                     <Link to="/" style={{ "marginTop": "14px" }} onClick={closedrawer} >Settings</Link>
                     <img src={flag_logo} alt="flag" style={{ "width": "35px", "marginLeft": "10px" }} />
                 </div>
+                {!userId || userId.length === 0 ? <Link to="/login" onClick={closedrawer} >Sign in</Link> : <Link onClick={()=>{
+                    logoutfnc();
+                    closedrawer();
+                }} to="/" >LogOut</Link>}
             </div>
         </div>
     )
