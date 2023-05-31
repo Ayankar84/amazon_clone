@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import flag_logo from "../images/india.png"
 import "./rightheader.css"
+import LogoutIcon from '@mui/icons-material/Logout';
+
 
 const RightHeader = ({user, closedrawer, logoutfnc}) => {
     const userId = useSelector((state)=>state.userId)
@@ -27,7 +29,7 @@ const RightHeader = ({user, closedrawer, logoutfnc}) => {
                 {!userId || userId.length === 0 ? <Link to="/login" onClick={closedrawer} >Sign in</Link> : <Link onClick={()=>{
                     logoutfnc();
                     closedrawer();
-                }} to="/" >LogOut</Link>}
+                }} to="/" ><LogoutIcon style={{ fontSize: 16, marginRight: 3 }} />LogOut</Link>}
             </div>
         </div>
     )

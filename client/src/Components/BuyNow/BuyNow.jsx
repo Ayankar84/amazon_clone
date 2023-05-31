@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { changeCart } from '../Redux/action';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Empty from './Empty';
+import { Link } from 'react-router-dom';
 
 
 const BuyNow = () => {
@@ -17,7 +19,7 @@ const BuyNow = () => {
 
   if (cart.data.length === 0) {
     return (
-      <></>
+      <Empty />
     )
   }
 
@@ -39,6 +41,26 @@ const BuyNow = () => {
     }
   }
 
+  const confirmOrder = async () => {
+    try {
+      const res = await fetch(`/user/${userId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cart: [] })
+      })
+      const info = await res.json();
+      console.log(info);
+      dispatch(changeCart({
+        data: [],
+        totalQty: 0
+      }))
+      toast.success("Order successfully placed");
+    }catch(e){
+      toast.error("Somthing wents wrong")
+      console.log({ error: e.message });
+    }
+  }
+
   const deleteProduct = async (index) => {
     try {
       let temp = cart.data
@@ -51,9 +73,9 @@ const BuyNow = () => {
       })
       const { data, error } = await res.json();
 
-      if(data){
+      if (data) {
         toast.success("Item deleted");
-      }else if(error){
+      } else if (error) {
         toast.error(error);
       }
 
@@ -76,9 +98,9 @@ const BuyNow = () => {
             return (
               <>
                 <div key={i} className="item_containert">
-                  <img src={e.product.url} alt="" />
+                  <Link to={`/product/${e.product.id}`}><img src={e.product.url} alt="" /></Link>
                   <div className="item_details">
-                    <h3>{e.product.title.longTitle}</h3>
+                    <Link style={{ "textDecoration": "none", "color": "inherit" }} to={`/product/${e.product.id}`}><h3>{e.product.title.longTitle}</h3></Link>
                     <h3>{e.product.title.shortTitle}</h3>
                     <h3 className='diffrentprice'>₹{e.product.price.cost}.00</h3>
                     <p className='unusuall'>Usually dispatched in 8 dayes.</p>
@@ -99,7 +121,7 @@ const BuyNow = () => {
 
           <Subtotal items={cart} />
         </div>
-        <Right items={cart} />
+        <Right items={cart} confirmOrder={confirmOrder} />
       </div>
       <ToastContainer position="top-center" autoClose={2000} theme="dark" />
     </div>

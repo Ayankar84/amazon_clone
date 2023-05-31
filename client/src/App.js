@@ -9,8 +9,8 @@ import PageLoading from './Components/Loading/PageLoading';
 function App() {
   let [loading, setLoading] = useState(true);
 
-  useEffect(()=>{
-    setTimeout(()=>{
+  useEffect(() => {
+    setTimeout(() => {
       setLoading(false);
     }, 1000)
   })
