@@ -19,7 +19,7 @@ const SignIn = () => {
   const handelSubmit = async (e) => {
     e.preventDefault();
     // console.log(state)
-    const jsondata = await fetch("/user/login", {
+    const jsondata = await fetch("https://super-worm-sweatshirt.cyclic.app/user/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(state)

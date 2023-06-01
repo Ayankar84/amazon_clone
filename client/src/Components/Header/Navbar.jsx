@@ -42,7 +42,7 @@ const Navbar = () => {
     useEffect(() => {
         const getuser = async () => {
             try {
-                let res = await fetch("/user", {
+                let res = await fetch("https://super-worm-sweatshirt.cyclic.app/user", {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 let userinfo = await res.json()
@@ -55,7 +55,7 @@ const Navbar = () => {
         const getCart = async (id) => {
             try {
                 dispatch(setId(id));
-                const jsondata = await fetch(`/user/${id}`);
+                const jsondata = await fetch(`https://super-worm-sweatshirt.cyclic.app/user/${id}`);
                 const data = await jsondata.json();
                 const { cart } = data;
                 let val = 0;

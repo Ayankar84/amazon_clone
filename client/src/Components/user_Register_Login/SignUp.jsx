@@ -17,7 +17,7 @@ const SignUp = () => {
     e.preventDefault();
     if (state.password === state.cpassword) {
       const { fname, email, mobile, password } = state;
-      const jsondata = await fetch("/user/register", {
+      const jsondata = await fetch("https://super-worm-sweatshirt.cyclic.app/user/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ fname, email, mobile, password })

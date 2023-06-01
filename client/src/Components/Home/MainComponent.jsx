@@ -12,7 +12,7 @@ const MainComponent = () => {
     useEffect(() => {
         const getdata = async () => {
             try {
-                let jsondata = await fetch("/products/alldata");
+                let jsondata = await fetch("https://super-worm-sweatshirt.cyclic.app/products/alldata");
                 let productList = await jsondata.json();
                 dispatch(saveData(productList.data))
             } catch (e) {

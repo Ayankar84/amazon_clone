@@ -28,7 +28,7 @@ const BuyNow = () => {
       let temp = cart.data
       temp[index].qty = value * 1;
 
-      const res = await fetch(`/user/${userId}`, {
+      const res = await fetch(`https://super-worm-sweatshirt.cyclic.app/user/${userId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cart: temp })
@@ -43,7 +43,7 @@ const BuyNow = () => {
 
   const confirmOrder = async () => {
     try {
-      const res = await fetch(`/user/${userId}`, {
+      const res = await fetch(`https://super-worm-sweatshirt.cyclic.app/user/${userId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cart: [] })
@@ -66,7 +66,7 @@ const BuyNow = () => {
       let temp = cart.data
       temp.splice(index, 1);
 
-      const res = await fetch(`/user/${userId}`, {
+      const res = await fetch(`https://super-worm-sweatshirt.cyclic.app/user/${userId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cart: temp })

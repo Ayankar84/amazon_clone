@@ -19,7 +19,7 @@ const Cart = () => {
     useEffect(() => {
         const getProduct = async () => {
             try {
-                const jsondata = await fetch(`/products/${id}`);
+                const jsondata = await fetch(`https://super-worm-sweatshirt.cyclic.app/products/${id}`);
                 const data = await jsondata.json();
                 setProduct(data.data);
                 // console.log(data.data);
@@ -56,7 +56,7 @@ const Cart = () => {
                 }
             }
 
-            const res = await fetch(`/user/${userId}`, {
+            const res = await fetch(`https://super-worm-sweatshirt.cyclic.app/user/${userId}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ cart: temp })
